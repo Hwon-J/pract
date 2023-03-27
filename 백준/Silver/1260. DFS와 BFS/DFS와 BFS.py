@@ -1,12 +1,11 @@
 from collections import deque
 
-# 정점의 개수만큼
 def dfs(num):
     print(num, end=' ')
     if sum(visited)==N:
         return
-
-    for i in sorted(graph[num]):
+    lst = sorted(graph[num])
+    for i in lst:
         if visited[i] == False:
             visited[i] = True
             dfs(i)
@@ -22,9 +21,6 @@ def bfs(num):
             if visited2[i]==False:
                 q.append(i)
                 visited2[i]=True
-
-
-
 
 
 # N: 정점의 개수, M: 간선의 개수, V: 탐색을 시작할 번호
