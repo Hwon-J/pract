@@ -1,4 +1,4 @@
-from collections import deque
+
 
 def dfs(num):
     print(num, end=' ')
@@ -11,10 +11,10 @@ def dfs(num):
             dfs(i)
 
 def bfs(num):
-    q=deque()
+    q=[]
     q.append(num)
     while q:
-        tm=q.popleft()
+        tm=q.pop(0)
         print(tm, end=' ')
         lst=sorted(graph[tm])
         for i in lst:
