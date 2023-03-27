@@ -1,0 +1,47 @@
+# 문제
+NxN 칸에 숫자가 적힌 판이 주어지고, 각 칸에서는 오른쪽이나 아래로만 이동할 수 있다.
+
+맨 왼쪽 위에서 오른쪽 아래까지 이동할 때, 지나는 칸에 써진 숫자의 합계가 최소가 되도록 움직였다면 이때의 합계가 얼마인지 출력하는 프로그램을 만드시오.
+
+# 입력
+첫 줄에 테스트케이스의 수 T가 주어진다. 1<=T<=50
+
+다음 줄부터 테스트 케이스의 별로 첫 줄에 가로 세로 칸 수 N이 주어지고, 다음 줄부터 N개씩 N개의 줄에 걸쳐 10이하의 자연수가 주어진다. 3<=N<=13
+
+# 출력
+각 줄마다 "#T" (T는 테스트 케이스 번호)를 출력한 뒤, 답을 출력한다.
+
+# 풀이
+- DFS를 통해 오른쪽이나 아래쪽 칸으로 이동하면서 합을 구한다.
+- 0,0 에서 출발하여 N-1,N-1까지 도착하는데 최소합을 구하는 것이므로 종료 조건을 y=x=N-1로 설정했다.
+- 오른쪽과 아래쪽의 좌표를 dr배열로 놓고 for문을 통해 합을 구했다.
+- 완전탐색은 시간이 많이 걸리기 떄문에 합을 계산하는 도중에 합이 최소값을 넘어가면 멈추는 방식으로 풀이 했다.
+
+# 코드
+    ```python
+    def ans(y, x, summ):
+    global mn
+    if summ > mn:
+        return
+    if y == (N - 1) and x == (N - 1):
+        if summ < mn:
+            mn = summ
+        return
+    for i in range(2):
+        dy = y + dr[i][0]
+        dx = x + dr[i][1]
+        if dx < 0 or dx > N - 1 or dy < 0 or dy > N - 1: continue
+        ans(dy, dx, summ + arr[dy][dx])
+
+
+    T = int(input())
+    for test_case in range(1, T + 1):
+    N = int(input())
+    arr = [list(map(int, input().split())) for _ in range(N)]
+    dr=[[0,1],[1,0]]
+    mn=21e8
+
+    ans(0, 0, arr[0][0])
+    print(f'#{test_case} {mn}')
+
+    ```
