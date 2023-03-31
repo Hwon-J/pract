@@ -1,16 +1,10 @@
-def bfs(num):
+def dfs(num):
     global rlt
-    q = []
-    q.append(num)
-    while q:
-        temp = q.pop(0)
-        if not temp in rlt:
-            rlt.append(temp)
-        for i in computer[temp]:
-            if visit[i]: continue
-            visit[i] = 1
-            q.append(i)
-
+    for i in computer[num]:
+        if visit[i]: continue
+        visit[i]=1
+        rlt.append(i)
+        dfs(i)
 
 # 컴퓨터의 수
 N = int(input())
@@ -26,5 +20,5 @@ for _ in range(M):
     computer[b].append(a)
 
 visit[1]=1
-bfs(1)
-print(len(rlt)-1)
+dfs(1)
+print(len(rlt))
