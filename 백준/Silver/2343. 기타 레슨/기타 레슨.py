@@ -4,17 +4,17 @@ lst = list(map(int, input().split()))
 st,ed = max(lst),sum(lst)
 while 1:
     mid = (st+ed)//2
-    cnt,summ=0,0
+    cnt,summ=1,0
     for i in lst:
         if summ + i > mid:
             cnt+=1
             summ=0
         summ+=i
-    if cnt >= M:
+    if cnt > M:
         st = mid+1
     else:
-        ed=mid
+        ed=mid-1
 
-    if st>=ed:
+    if st>ed:
         break
 print(st)
