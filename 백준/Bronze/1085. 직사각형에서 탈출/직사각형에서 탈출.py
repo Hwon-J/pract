@@ -1,0 +1,5 @@
+x,y,w,h = map(int, input().split())
+g = min(x,w-x)
+s = min(y,h-y)
+mn = min(g,s)
+print(mn)
