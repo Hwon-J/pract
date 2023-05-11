@@ -1,13 +1,13 @@
 import heapq,sys
 input = sys.stdin.readline
 N = int(input())
-q =[]
+q = []
 for _ in range(N):
-    a = int(input())
-    if a != 0:
-        heapq.heappush(q,-a)
-    else:
+    x = int(input())
+    if x == 0:
         if not q:
             print(0)
         else:
             print(-heapq.heappop(q))
+    else:
+        heapq.heappush(q, -x)
