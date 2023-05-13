@@ -1,16 +1,19 @@
-import heapq
+import sys, heapq
+input = sys.stdin.readline
 
 N = int(input())
-card = []
-for i in range(N):
-    a = int(input())
-    heapq.heappush(card,a)
-total = 0
+q = []
+for _ in range(N):
+    x = int(input())
+    heapq.heappush(q,x)
 
-while (len(card)>1):
-    tm1= heapq.heappop(card)
-    tm2 = heapq.heappop(card)
-    total+=(tm1+tm2)
-    heapq.heappush(card, tm1+tm2)
-
-print(total)
+sum = 0
+while 1:
+    if len(q)==1:
+        break
+    a = heapq.heappop(q)
+    b = heapq.heappop(q)
+    tm = a + b
+    sum += tm
+    heapq.heappush(q,tm)
+print(sum)
