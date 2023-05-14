@@ -7,28 +7,29 @@ for _ in range(T):
     min_q = []
     max_q = []
     k = int(input())
-    check = [1] * k
+    check = [0] * k
 
     for i in range(k):
-        cal, num = input().split()
-        num = int(num)
-        if cal == "I":
-            heapq.heappush(min_q, (num, i))
-            heapq.heappush(max_q, (-num, i))
+        a, b = input().split()
+        if a == "I":
+            heapq.heappush(min_q, (int(b), i))
+            heapq.heappush(max_q, (-int(b), i))
         else:
-            if num == -1:
+            if b == '1':
                 if min_q:
-                    check[heapq.heappop(min_q)[1]] = 0
-            elif num == 1:
+                    check[heapq.heappop(max_q)[1]] = 1
+            else:
                 if min_q:
-                    check[heapq.heappop(max_q)[1]] = 0
+                    check[heapq.heappop(min_q)[1]] = 1
 
-        while min_q and check[min_q[0][1]] == 0:
+        while min_q and check[min_q[0][1]] == 1:
             heapq.heappop(min_q)
-        while max_q and check[max_q[0][1]] == 0:
+        while max_q and check[max_q[0][1]] == 1:
             heapq.heappop(max_q)
 
-    if min_q == []:
+    if not min_q:
         print("EMPTY")
     else:
-        print(-max_q[0][0], min_q[0][0])
+        mx = heapq.heappop(max_q)
+        mn = heapq.heappop(min_q)
+        print(-mx[0], mn[0])
