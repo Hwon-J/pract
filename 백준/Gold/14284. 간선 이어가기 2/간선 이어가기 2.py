@@ -14,7 +14,6 @@ s, t = map(int, input().split())
 INF = int(21e8)
 dist = [INF]*(n+1)
 dist[s] = 0
-visit = [0]*(n+1)
 
 def dijk(s):
     q = []
