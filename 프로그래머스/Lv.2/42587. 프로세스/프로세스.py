@@ -1,18 +1,12 @@
-from collections import deque
 
 def solution(priorities, location):
+    queue =  [(i,p) for i,p in enumerate(priorities)]
     answer = 0
-    priority_location = deque([(i, p) for i, p in enumerate(priorities)])
-    
-    while priority_location:
-        current = priority_location.popleft()
-        max_priority = max(priority_location, key=lambda x: x[1], default=(0, 0))[1]
-
-        if current[1] >= max_priority:
-            answer += 1
-            if current[0] == location:
-                break
+    while True:
+        cur = queue.pop(0)
+        if any(cur[1] < q[1] for q in queue):
+            queue.append(cur)
         else:
-            priority_location.append(current)
-
-    return answer
+            answer += 1
+            if cur[0] == location:
+                return answer
