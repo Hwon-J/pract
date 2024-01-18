@@ -11,7 +11,6 @@ def solution(n, works):
         tm -= 1
         n -= 1
         heapq.heappush(works_heap,-tm)
-    print(works_heap)
     for work in works_heap:
         answer += work**2
     return answer
