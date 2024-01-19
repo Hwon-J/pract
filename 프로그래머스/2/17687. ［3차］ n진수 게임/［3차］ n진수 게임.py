@@ -1,28 +1,19 @@
-def formation(number, base):
-    if number == 0:
-        return '0'
-    else:
-        result = ''
-        while number > 0:
-            remain = number % base
-            if remain >= 10:
-                result = chr(ord('A') + remain - 10) + result
-            else:
-                result = str(remain) + result
-            number //= base
-        return result
-
 def solution(n, t, m, p):
-    answer = ''
-    ed = t*m
-    number = 0
-    rlt = ''
-    while ed > 0:
-        tm = formation(number, n)
-        rlt += tm
-        ed -= len(tm)
-        number += 1
-    for i in range(p-1,len(rlt),m):
-        answer += rlt[i]
-    answer = answer[:t]
-    return answer
+    m_chars = '0123456789ABCDEF'
+
+    def _rep(numb, to):
+        j, k = divmod(numb, to)
+        i = m_chars[k]
+        return ('' if j == 0 else _rep(j, to)) + i
+
+    numbers = ''
+    for i in range(0, t * m):
+        numbers += _rep(i, n)
+        if len(numbers) >= t * m:
+            break
+
+    result = ''
+    for i in range(p - 1, t * m, m):
+        result += numbers[i]
+
+    return result
