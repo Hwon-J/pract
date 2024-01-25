@@ -16,14 +16,12 @@ for i in range(len(node_parents)):
     if node_parents[i] >= 0:
         graph[node_parents[i]].append(i)
 
-if node_parents[remove_node] >= 0:
-    graph[node_parents[remove_node]].remove(remove_node)
-
 dfs(remove_node)
 
 for i in range(len(node_check)):
     if node_check[i] == 0:
         if not graph[i]:
             leaf+=1
-
+if len(graph[node_parents[remove_node]])==1:
+    leaf+=1
 print(leaf)
