@@ -1,27 +1,21 @@
-def dfs(node):
-    node_check[node] = 1
-    for child in graph[node]:
-        if node_check[child] == 0:
-            node_check[child] = 1
-            dfs(child)
+import sys
+input = sys.stdin.readline
 
-N = int(input())
-node_parents = list(map(int, input().split()))
-remove_node = int(input())
-graph = [[] for _ in range(N)]
-node_check = [0]*N
-leaf = 0
+def dfs(v):
+    tree[v] = -2
+    for i in range(n): 
+        if v == tree[i]: 
+            dfs(i) 
+            
+n = int(input())
+tree = list(map(int, input().split()))
+erase = int(input())
 
-for i in range(len(node_parents)):
-    if node_parents[i] >= 0:
-        graph[node_parents[i]].append(i)
+dfs(erase)
+cnt = 0
 
-dfs(remove_node)
+for i in range(n):
+    if tree[i] != -2 and i not in tree:
+        cnt+=1
 
-for i in range(len(node_check)):
-    if node_check[i] == 0:
-        if not graph[i]:
-            leaf+=1
-if len(graph[node_parents[remove_node]])==1:
-    leaf+=1
-print(leaf)
+print(cnt)
