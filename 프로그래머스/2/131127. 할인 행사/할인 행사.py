@@ -1,14 +1,12 @@
-def matching(dc, want, number):
-    for i in range(len(want)):
-        if dc[want[i]] != number[i]:
-            return 0
-    return 1
-
 from collections import Counter
-
 def solution(want, number, discount):
     answer = 0
-    for i in range(len(discount)-10+1):
-        DC = Counter(discount[i:10+i])
-        answer += matching(DC, want, number)
+    dic = dict()
+    for w, n in zip(want, number):
+        dic[w] = n
+    for start in range(len(discount)-9):
+        counter = Counter(discount[start:start+10])
+        if dic == counter:
+            answer += 1
+
     return answer
