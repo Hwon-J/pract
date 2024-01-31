@@ -1,22 +1,24 @@
 n=int(input())
 lst=list(map(int, input().split()))
 lst.sort()
-rlt=0
-for k in range(n):
-    find=lst[k]
-    i=0
-    j=n-1
-    while i < j:
-        if lst[i]+lst[j]==find:
-            if i!=k and j!=k:
-                rlt+=1
+
+cnt=0
+# 정렬한 상태이므로 최소 합은 2번째 인덱스이기 떄문에 2부터 시작
+for i in range(n):
+    target=lst[i]
+    st = 0
+    ed = n - 1
+    while st<ed:
+        if lst[st]+lst[ed]==target:
+            if st!=i and ed!=i:
+                cnt+=1
                 break
-            elif i==k:
-                i+=1
-            elif j==k:
-                j-=1
-        elif lst[i]+lst[j]<find:
-            i+=1
-        else:
-            j-=1
-print(rlt)
+            elif st==i:
+                st+=1
+            elif ed==i:
+                ed-=1
+        elif lst[st]+lst[ed]<target:
+            st+=1
+        elif lst[st] + lst[ed] > target:
+            ed-=1
+print(cnt)
