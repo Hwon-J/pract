@@ -5,21 +5,21 @@ tm = 1
 
 for i in range(len(string)):
     if string[i] == '(':
-        stack.append('(')
+        stack.append(string[i])
         tm *= 2
     elif string[i] == '[':
-        stack.append('[')
+        stack.append(string[i])
         tm *= 3
-    elif string[i] == ')':
-        if not stack or stack[-1] != '(':
+    elif string[i] == ")":
+        if not stack or stack[-1] != "(":
             answer = 0
             break
-        if string[i - 1] == '(':
+        if string[i - 1] == "(":
             answer += tm
         stack.pop()
         tm //= 2
     else:
-        if not stack or stack[-1] != '[':
+        if not stack or stack[-1] != "[":
             answer = 0
             break
         if string[i - 1] == '[':
